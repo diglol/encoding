@@ -48,7 +48,7 @@ allprojects {
       }
     }
     configure<MavenPublishBaseExtension> {
-      publishToMavenCentral(SonatypeHost.DEFAULT)
+      publishToMavenCentral(SonatypeHost.S01)
       signAllPublications()
       pom {
         description.set("Diglol Encoding provides implementations of common encodings for Kotlin Multiplatform.")
