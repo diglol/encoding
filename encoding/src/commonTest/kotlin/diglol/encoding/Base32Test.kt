@@ -1,6 +1,7 @@
 package diglol.encoding
 
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -16,6 +17,10 @@ class Base32Test {
     "foobar" to "MZXW6YTBOI======",
   )
 
+  private val base32SampleBytes = base32Samples.map { (key, value) ->
+    key.encodeToByteArray() to value.encodeToByteArray()
+  }
+
   private val base32HexSamples = mapOf(
     "" to "", // RFC 4648 examples
     "f" to "CO======",
@@ -26,31 +31,59 @@ class Base32Test {
     "foobar" to "CPNMUOJ1E8======",
   )
 
-  @Test fun testEncodeBase32() {
+  private val base32HexSampleBytes = base32HexSamples.map { (key, value) ->
+    key.encodeToByteArray() to value.encodeToByteArray()
+  }
+
+  @Test fun encodeBase32() {
+    base32SampleBytes.forEach { (key, value) ->
+      assertContentEquals(value, key.encodeBase32())
+    }
+  }
+
+  @Test fun decodeBase32() {
+    base32SampleBytes.forEach { (key, value) ->
+      assertContentEquals(key, value.decodeBase32())
+    }
+  }
+
+  @Test fun encodeBase32ToString() {
     base32Samples.forEach { (key, value) ->
-      assertEquals(value, key.encodeToByteArray().encodeBase32())
+      assertEquals(value, key.encodeToByteArray().encodeBase32ToString())
     }
   }
 
-  @Test fun testDecodeBase32() {
+  @Test fun decodeBase32ToBytes() {
     base32Samples.forEach { (key, value) ->
-      assertEquals(key, value.decodeBase32()?.decodeToString())
+      assertEquals(key, value.decodeBase32ToBytes()?.decodeToString())
     }
-    assertNotNull("CPNMUOJ ".decodeBase32())
-    assertNull("CPNMUOJ+".decodeBase32())
+    assertNotNull("CPNMUOJ ".decodeBase32ToBytes())
+    assertNull("CPNMUOJ0".decodeBase32ToBytes())
   }
 
-  @Test fun testEncodeBase32Hex() {
-    base32HexSamples.forEach { (key, value) ->
-      assertEquals(value, key.encodeToByteArray().encodeBase32Hex())
+  @Test fun encodeBase32Hex() {
+    base32HexSampleBytes.forEach { (key, value) ->
+      assertContentEquals(value, key.encodeBase32Hex())
     }
   }
 
-  @Test fun testDecodeBase32Hex() {
-    base32HexSamples.forEach { (key, value) ->
-      assertEquals(key, value.decodeBase32Hex()?.decodeToString())
+  @Test fun decodeBase32Hex() {
+    base32HexSampleBytes.forEach { (key, value) ->
+      assertContentEquals(key, value.decodeBase32Hex())
     }
-    assertNotNull("CPNMUOJ ".decodeBase32())
-    assertNull("CPNMUOJ+".decodeBase32())
+  }
+
+  @Test fun encodeBase32HexToString() {
+    base32HexSamples.forEach { (key, value) ->
+      assertEquals(value, key.encodeToByteArray().encodeBase32HexToString())
+    }
+  }
+
+  @Test fun decodeBase32HexToBytes() {
+    base32HexSamples.forEach { (key, value) ->
+      assertEquals(key, value.decodeBase32HexToBytes()?.decodeToString())
+    }
+    assertNotNull("CPNMUOJ ".decodeBase32HexToBytes())
+    assertNull("CPNMUOJZ".decodeBase32HexToBytes())
   }
 }

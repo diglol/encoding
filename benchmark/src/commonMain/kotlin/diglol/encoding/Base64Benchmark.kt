@@ -20,14 +20,18 @@ class Base64Benchmark {
   @Param("1024", "10240", "102400")
   var dataSize = 0
   private lateinit var data: ByteArray
-  private lateinit var base64: String
-  private lateinit var base64Url: String
+  private lateinit var base64: ByteArray
+  private lateinit var base64String: String
+  private lateinit var base64Url: ByteArray
+  private lateinit var base64UrlString: String
 
   @Setup
   fun setup() {
     data = Random.nextBytes(dataSize)
-    base64 = data.encodeHex()
-    base64Url = data.encodeHex()
+    base64 = data.encodeBase64()
+    base64String = data.encodeBase64ToString()
+    base64Url = data.encodeBase64Url()
+    base64UrlString = data.encodeBase64UrlToString()
   }
 
   @Benchmark
@@ -37,8 +41,20 @@ class Base64Benchmark {
   fun decodeBase64() = base64.decodeBase64()
 
   @Benchmark
+  fun encodeBase64ToString() = data.encodeBase64ToString()
+
+  @Benchmark
+  fun decodeBase64ToBytes() = base64String.decodeBase64ToBytes()
+
+  @Benchmark
   fun encodeBase64Url() = data.encodeBase64Url()
 
   @Benchmark
   fun decodeBase64Url() = base64Url.decodeBase64Url()
+
+  @Benchmark
+  fun encodeBase64UrlToString() = data.encodeBase64UrlToString()
+
+  @Benchmark
+  fun decodeBase64UrlToBytes() = base64UrlString.decodeBase64UrlToBytes()
 }

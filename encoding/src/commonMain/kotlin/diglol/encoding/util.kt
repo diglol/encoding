@@ -1,12 +1,16 @@
 package diglol.encoding
 
-fun ByteArray.selfOrCopyOf(newSize: Int): ByteArray = if (size == newSize) this else copyOf(newSize)
+@Suppress("NOTHING_TO_INLINE")
+inline fun ByteArray.selfOrCopyOf(newSize: Int): ByteArray =
+  if (size == newSize) this else copyOf(newSize)
 
-internal fun String.ignoreTrailingLength(): Int {
-  var limit = length
+// Was all padding, whitespace, or otherwise ignorable characters
+@Suppress("NOTHING_TO_INLINE")
+internal inline fun ByteArray.ignoreTrailingLength(): Int {
+  var limit = size
   while (limit > 0) {
-    val c = this[limit - 1]
-    if (c != '=' && c != '\n' && c != '\r' && c != ' ' && c != '\t') {
+    val c = this[limit - 1].toInt()
+    if (c != '='.code && c != '\n'.code && c != '\r'.code && c != ' '.code && c != '\t'.code) {
       break
     }
     limit--

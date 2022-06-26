@@ -10,15 +10,17 @@ allOpen {
 
 kotlin {
   jvm()
-  js(IR) {
+  js("jsIr", IR) { // TODO BOTH error
     browser()
     nodejs()
   }
-  js { // BOTH error
+  js("js", LEGACY) {
     browser()
     nodejs()
   }
 
+  macosX64()
+  macosArm64()
   mingwX64()
   linuxX64()
 
@@ -46,8 +48,9 @@ kotlin {
     val jsMain by sourceSets.getting
     val jsTest by sourceSets.getting
 
-    val nativeMain by sourceSets.creating
-    nativeMain.dependsOn(commonMain)
+    val nativeMain by sourceSets.creating {
+      dependsOn(commonMain)
+    }
 
     val darwinMain by sourceSets.creating {
       dependsOn(nativeMain)
@@ -96,15 +99,14 @@ benchmark {
       iterationTime = 1
       advanced("jvmForks", 1)
       advanced("nativeGCAfterIteration", true)
-      advanced("perBenchmark", "perBenchmark")
+      advanced("nativeFork", "perBenchmark")
       reportFormat = "text"
     }
 
     targets {
       register("jvm")
-      register("js")
       register("jsIr")
-      register("iosArm64")
+      register("js")
       register("macosX64")
       register("macosArm64")
       register("linuxX64")

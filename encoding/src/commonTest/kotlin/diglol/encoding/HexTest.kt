@@ -1,6 +1,7 @@
 package diglol.encoding
 
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
@@ -15,16 +16,32 @@ class HexTest {
     "foobar" to "666F6F626172",
   )
 
-  @Test fun testEncodeHex() {
-    samples.forEach { (key, value) ->
-      assertEquals(value, key.encodeToByteArray().encodeHex())
+  private val sampleBytes = samples.map { (key, value) ->
+    key.encodeToByteArray() to value.encodeToByteArray()
+  }
+
+  @Test fun encodeHex() {
+    sampleBytes.forEach { (key, value) ->
+      assertContentEquals(value, key.encodeHex())
     }
   }
 
-  @Test fun testDecodeHex() {
-    samples.forEach { (key, value) ->
-      assertEquals(key, value.decodeHex()?.decodeToString())
+  @Test fun decodeHex() {
+    sampleBytes.forEach { (key, value) ->
+      assertContentEquals(key, value.decodeHex())
     }
-    assertNull("666F6F62617G".decodeBase32())
+  }
+
+  @Test fun encodeHexToString() {
+    samples.forEach { (key, value) ->
+      assertEquals(value, key.encodeToByteArray().encodeHexToString())
+    }
+  }
+
+  @Test fun decodeHexToBytes() {
+    samples.forEach { (key, value) ->
+      assertEquals(key, value.decodeHexToBytes()?.decodeToString())
+    }
+    assertNull("666F6F62617G".decodeHexToBytes())
   }
 }

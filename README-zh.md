@@ -13,7 +13,7 @@ Diglol Encoding 为 Kotlin Multiplatform 提供常用的编码实现。
 我们的 [change log](CHANGELOG.md) 有发布历史。
 
 ```gradle
-implementation("com.diglol.encoding:encoding:0.1.0")
+implementation("com.diglol.encoding:encoding:0.1.0-SNAPSHOT")
 ```
 
 ### 使用
@@ -33,32 +33,29 @@ assert(data.contentEquals(hex.decodeHex()))
 
 ```kotlin
 val data = "foobar".toByteArray()
-
-val base32 = data.encodeBase32()
-println(base32)
+val base32String = data.encodeBase32ToString()
+println(base32String)
 // 输出：MZXW6YTBOI======
-assert(data.contentEquals(base32.decodeBase32()))
+assert(data.contentEquals(base32String.decodeBase32ToBytes()))
 
-val base32Hex = data.encodeBase32Hex()
-println(base32Hex)
+val base32HexString = data.encodeBase32HexToString()
+println(base32HexString)
 // 输出：CPNMUOJ1E8======
-assert(data.contentEquals(base32Hex.decodeBase32Hex()))
+assert(data.contentEquals(base32HexString.decodeBase32HexToBytes()))
 ```
 
 ##### [Base64][rfc4648]
 
 ```kotlin
-val data = "foobar".toByteArray()
-
-val base64 = data.encodeBase64()
-println(base64)
+val base64String = data.encodeBase64ToString()
+println(base64String)
 // 输出：Zm9vYmFy
-assert(data.contentEquals(base64.decodeBase64()))
+assert(data.contentEquals(base64String.decodeBase64ToBytes()))
 
-val base64Url = data.encodeBase64Url()
-println(base64Url)
+val base64UrlString = data.encodeBase64UrlToString()
+println(base64UrlString)
 // 输出：Zm9vYmFy
-assert(data.contentEquals(base64Url.decodeBase64Url()))
+assert(data.contentEquals(base64UrlString.decodeBase64UrlToBytes()))
 ```
 
 ### License
