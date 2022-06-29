@@ -45,6 +45,8 @@ class Base32Test {
     base32SampleBytes.forEach { (key, value) ->
       assertContentEquals(key, value.decodeBase32())
     }
+    assertNotNull("CPNMUOJ ".encodeToByteArray().decodeBase32())
+    assertNull("CPNMUOJ0".encodeToByteArray().decodeBase32())
   }
 
   @Test fun encodeBase32ToString() {
@@ -71,6 +73,8 @@ class Base32Test {
     base32HexSampleBytes.forEach { (key, value) ->
       assertContentEquals(key, value.decodeBase32Hex())
     }
+    assertNotNull("CPNMUOJ ".encodeToByteArray().decodeBase32Hex())
+    assertNull("CPNMUOJZ".encodeToByteArray().decodeBase32Hex())
   }
 
   @Test fun encodeBase32HexToString() {

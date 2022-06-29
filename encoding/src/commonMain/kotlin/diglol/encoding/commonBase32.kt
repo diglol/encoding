@@ -46,12 +46,12 @@ internal fun ByteArray.commonEncodeBase32(map: ByteArray = BASE32): ByteArray {
       val b0 = this[i].retrieveBits()
       out[index++] = map[(b0 shr 3 and 0x1fL).toInt()] // 8-1*5 = 3
       out[index++] = map[(b0 shl 2 and 0x1fL).toInt()] // 5-3 = 2
-      out[index++] = '='.code.toByte()
-      out[index++] = '='.code.toByte()
-      out[index++] = '='.code.toByte()
-      out[index++] = '='.code.toByte()
-      out[index++] = '='.code.toByte()
-      out[index] = '='.code.toByte()
+      out[index++] = equalsByte
+      out[index++] = equalsByte
+      out[index++] = equalsByte
+      out[index++] = equalsByte
+      out[index++] = equalsByte
+      out[index] = equalsByte
     }
     2 -> { // 8*2 = 16 bits
       val b0 = this[i++].retrieveBits()
@@ -60,10 +60,10 @@ internal fun ByteArray.commonEncodeBase32(map: ByteArray = BASE32): ByteArray {
       out[index++] = map[(b1 shr 6 and 0x1fL).toInt()] // 16-2*5 = 6
       out[index++] = map[(b1 shr 1 and 0x1fL).toInt()] // 16-3*5 = 1
       out[index++] = map[(b1 shl 4 and 0x1fL).toInt()] // 5-1 = 4
-      out[index++] = '='.code.toByte()
-      out[index++] = '='.code.toByte()
-      out[index++] = '='.code.toByte()
-      out[index] = '='.code.toByte()
+      out[index++] = equalsByte
+      out[index++] = equalsByte
+      out[index++] = equalsByte
+      out[index] = equalsByte
     }
     3 -> { // 8*3 = 24 bits
       val b0 = this[i++].retrieveBits()
@@ -74,9 +74,9 @@ internal fun ByteArray.commonEncodeBase32(map: ByteArray = BASE32): ByteArray {
       out[index++] = map[(b2 shr 9 and 0x1fL).toInt()] // 24-3*5 = 9
       out[index++] = map[(b2 shr 4 and 0x1fL).toInt()] // 24-4*5 = 4
       out[index++] = map[(b2 shl 1 and 0x1fL).toInt()] // 5-4 = 1
-      out[index++] = '='.code.toByte()
-      out[index++] = '='.code.toByte()
-      out[index] = '='.code.toByte()
+      out[index++] = equalsByte
+      out[index++] = equalsByte
+      out[index] = equalsByte
     }
     4 -> { // 8*4 = 32 bits
       val b0 = this[i++].retrieveBits()
@@ -90,7 +90,7 @@ internal fun ByteArray.commonEncodeBase32(map: ByteArray = BASE32): ByteArray {
       out[index++] = map[(b3 shr 7 and 0x1fL).toInt()] // 32-5*5 = 7
       out[index++] = map[(b3 shr 2 and 0x1fL).toInt()] // 32-6*5 = 2
       out[index++] = map[(b3 shl 3 and 0x1fL).toInt()] // 5-2 = 3
-      out[index] = '='.code.toByte()
+      out[index] = equalsByte
     }
   }
   return out
@@ -98,7 +98,7 @@ internal fun ByteArray.commonEncodeBase32(map: ByteArray = BASE32): ByteArray {
 
 internal fun ByteArray.commonDecodeBase32(map: ByteArray = BASE32): ByteArray? {
   val isBase32 = map.last().toInt() == '7'.code
-  val limit = ignoreTrailingLength()
+  val limit = sizeOfIgnoreTrailing()
 
   if (limit == 0) {
     return ByteArray(0)
@@ -133,7 +133,7 @@ internal fun ByteArray.commonDecodeBase32(map: ByteArray = BASE32): ByteArray? {
         in '0'.code..'9'.code -> {
           if (isBase32) {
             // Default base32 uses 2-7 only
-            if (c in '0'.code..'1'.code || c in '8'.code..'9'.code) {
+            if (c !in '2'.code..'7'.code) {
               return null
             }
 
@@ -147,9 +147,6 @@ internal fun ByteArray.commonDecodeBase32(map: ByteArray = BASE32): ByteArray? {
             //  9    57    9 (ASCII - 48)
             c - 48L
           }
-        }
-        '\n'.code.toByte(), '\r'.code.toByte(), ' '.code.toByte(), '\t'.code.toByte() -> {
-          continue
         }
         else -> {
           return null

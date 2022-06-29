@@ -45,8 +45,8 @@ internal fun ByteArray.commonEncodeBase64(map: ByteArray = BASE64): ByteArray {
       val b0 = this[i].toInt()
       out[index++] = map[b0 and 0xff shr 2]
       out[index++] = map[b0 and 0x03 shl 4]
-      out[index++] = '='.code.toByte()
-      out[index] = '='.code.toByte()
+      out[index++] = equalsByte
+      out[index] = equalsByte
     }
     2 -> {
       val b0 = this[i++].toInt()
@@ -54,7 +54,7 @@ internal fun ByteArray.commonEncodeBase64(map: ByteArray = BASE64): ByteArray {
       out[index++] = map[(b0 and 0xff shr 2)]
       out[index++] = map[(b0 and 0x03 shl 4) or (b1 and 0xff shr 4)]
       out[index++] = map[(b1 and 0x0f shl 2)]
-      out[index] = '='.code.toByte()
+      out[index] = equalsByte
     }
   }
   return out
@@ -62,7 +62,7 @@ internal fun ByteArray.commonEncodeBase64(map: ByteArray = BASE64): ByteArray {
 
 internal fun ByteArray.commonDecodeBase64(map: ByteArray = BASE64): ByteArray? {
   val isBase64 = map.last().toInt() == '/'.code
-  val limit = ignoreTrailingLength()
+  val limit = sizeOfIgnoreTrailing()
 
   if (limit == 0) {
     return ByteArray(0)
@@ -75,50 +75,47 @@ internal fun ByteArray.commonDecodeBase64(map: ByteArray = BASE64): ByteArray? {
 
   var word = 0
   for (pos in 0 until limit) {
-    val c = this[pos]
+    val c = this[pos].toInt()
 
     val bits: Int
-    if (c in 'A'.code..'Z'.code) {
-      // char ASCII value
-      //  A    65    0
-      //  Z    90    25 (ASCII - 65)
-      bits = c - 65
-    } else if (c in 'a'.code..'z'.code) {
-      // char ASCII value
-      //  a    97    26
-      //  z    122   51 (ASCII - 71)
-      bits = c - 71
-    } else if (c in '0'.code..'9'.code) {
-      // char ASCII value
-      //  0    48    52
-      //  9    57    61 (ASCII + 4)
-      bits = c + 4
-    } else if (c.toInt() == '+'.code || c.toInt() == '-'.code) {
-      if (isBase64) {
-        if (c.toInt() == '-'.code) {
-          return null
-        }
-      } else {
-        if (c.toInt() == '+'.code) {
-          return null
-        }
+    when (c) {
+      in 'A'.code..'Z'.code -> {
+        // char ASCII value
+        //  A    65    0
+        //  Z    90    25 (ASCII - 65)
+        bits = c - 65
       }
-      bits = 62
-    } else if (c.toInt() == '/'.code || c.toInt() == '_'.code) {
-      if (isBase64) {
-        if (c.toInt() == '_'.code) {
-          return null
-        }
-      } else {
-        if (c.toInt() == '/'.code) {
-          return null
-        }
+      in 'a'.code..'z'.code -> {
+        // char ASCII value
+        //  a    97    26
+        //  z    122   51 (ASCII - 71)
+        bits = c - 71
       }
-      bits = 63
-    } else if (c.toInt() == '\n'.code || c.toInt() == '\r'.code || c.toInt() == ' '.code || c.toInt() == '\t'.code) {
-      continue
-    } else {
-      return null
+      in '0'.code..'9'.code -> {
+        // char ASCII value
+        //  0    48    52
+        //  9    57    61 (ASCII + 4)
+        bits = c + 4
+      }
+      '+'.code -> {
+        if (!isBase64) return null
+        bits = 62
+      }
+      '-'.code -> {
+        if (isBase64) return null
+        bits = 62
+      }
+      '/'.code -> {
+        if (!isBase64) return null
+        bits = 63
+      }
+      '_'.code -> {
+        if (isBase64) return null
+        bits = 63
+      }
+      else -> {
+        return null
+      }
     }
 
     // Append this char's 6 bits to the word.
@@ -152,3 +149,4 @@ internal fun ByteArray.commonDecodeBase64(map: ByteArray = BASE64): ByteArray? {
   }
   return out.selfOrCopyOf(outCount)
 }
+

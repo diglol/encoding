@@ -1,7 +1,7 @@
 package diglol.encoding
 
-fun ByteArray.encodeHex(): ByteArray = commonEncodeHex()
-fun ByteArray.decodeHex(): ByteArray? = commonDecodeHex()
+expect fun ByteArray.encodeHex(): ByteArray
+expect fun ByteArray.decodeHex(): ByteArray?
 
-fun ByteArray.encodeHexToString(): String = commonEncodeHex().decodeToString()
-fun String.decodeHexToBytes(): ByteArray? = encodeToByteArray().commonDecodeHex()
+expect fun ByteArray.encodeHexToString(): String
+expect fun String.decodeHexToBytes(): ByteArray?

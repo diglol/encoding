@@ -1,9 +1,13 @@
 plugins {
   kotlin("multiplatform")
+  id("com.android.library")
   id("com.vanniktech.maven.publish.base")
 }
 
 kotlin {
+  android {
+    publishLibraryVariants("release")
+  }
   jvm()
   js(BOTH) {
     browser()
@@ -31,6 +35,15 @@ kotlin {
   linuxArm32Hfp()
 
   sourceSets {
+    all {
+      languageSettings.optIn("kotlin.RequiresOptIn")
+    }
+    matching { it.name.endsWith("Test") }.all {
+      languageSettings {
+        optIn("kotlin.RequiresOptIn")
+      }
+    }
+
     val commonMain by sourceSets.getting
     val commonTest by sourceSets.getting {
       dependencies {
@@ -38,12 +51,28 @@ kotlin {
       }
     }
 
-    val jvmMain by sourceSets.getting {
+    val commonJvmMain by sourceSets.creating {
       dependsOn(commonMain)
+    }
+    val commonJvmTest by sourceSets.creating {
+      dependsOn(commonJvmMain)
+      dependsOn(commonTest)
+    }
+
+    val jvmMain by sourceSets.getting {
+      dependsOn(commonJvmMain)
     }
     val jvmTest by sourceSets.getting {
       dependsOn(jvmMain)
-      dependsOn(commonTest)
+      dependsOn(commonJvmTest)
+    }
+
+    val androidMain by sourceSets.getting {
+      dependsOn(commonJvmMain)
+    }
+    val androidTest by sourceSets.getting {
+      dependsOn(androidMain)
+      dependsOn(commonJvmTest)
     }
 
     val jsMain by sourceSets.getting
@@ -55,7 +84,6 @@ kotlin {
     val darwinMain by sourceSets.creating {
       dependsOn(nativeMain)
     }
-
     val darwinTest by sourceSets.creating {
       dependsOn(commonTest)
     }
@@ -90,4 +118,26 @@ kotlin {
       )
     }
   }
+}
+
+android {
+  compileSdk = libs.versions.compileSdk.get().toInt()
+  defaultConfig {
+    minSdk = libs.versions.minSdk.get().toInt()
+
+    consumerProguardFiles("proguard-rules.pro")
+  }
+
+  val main by sourceSets.getting {
+    manifest.srcFile("src/androidMain/AndroidManifest.xml")
+  }
+
+  testOptions {
+    unitTests.isReturnDefaultValues = true
+  }
+}
+
+dependencies {
+  androidTestImplementation(libs.junit)
+  androidTestImplementation(libs.androidx.test.runner)
 }

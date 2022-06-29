@@ -13,7 +13,7 @@ import kotlinx.benchmark.Setup
 import kotlinx.benchmark.State
 
 @State(Scope.Benchmark)
-@Measurement(iterations = 5, time = 1)
+@Measurement(iterations = 5, time = 1, timeUnit = BenchmarkTimeUnit.SECONDS, batchSize = -1)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(BenchmarkTimeUnit.MICROSECONDS)
 class Base64Benchmark {

@@ -30,6 +30,7 @@ class HexTest {
     sampleBytes.forEach { (key, value) ->
       assertContentEquals(key, value.decodeHex())
     }
+    assertNull("666F6F62617G".encodeToByteArray().decodeHex())
   }
 
   @Test fun encodeHexToString() {

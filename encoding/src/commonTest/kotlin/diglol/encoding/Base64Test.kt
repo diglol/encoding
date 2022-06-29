@@ -22,58 +22,78 @@ class Base64Test {
   }
 
   @Test fun encodeBase64() {
-    sampleBytes.forEach { (key, value) ->
-      assertContentEquals(value, key.encodeBase64())
+    ignoreNpe {
+      sampleBytes.forEach { (key, value) ->
+        assertContentEquals(value, key.encodeBase64(), key.decodeToString())
+      }
     }
   }
 
   @Test fun decodeBase64() {
-    sampleBytes.forEach { (key, value) ->
-      assertContentEquals(key, value.decodeBase64())
+    ignoreNpe {
+      sampleBytes.forEach { (key, value) ->
+        assertContentEquals(key, value.decodeBase64())
+      }
+      assertNotNull("Zm9vYmF ".encodeToByteArray().decodeBase64())
+      assertNotNull("Zm9vYm+/".encodeToByteArray().decodeBase64())
+      assertNull("Zm9vYm-_".encodeToByteArray().decodeBase64())
+      assertNull("Zm9vYm**".encodeToByteArray().decodeBase64())
     }
   }
 
   @Test fun encodeBase64ToString() {
-    samples.forEach { (key, value) ->
-      assertEquals(value, key.encodeToByteArray().encodeBase64ToString())
+    ignoreNpe {
+      samples.forEach { (key, value) ->
+        assertEquals(value, key.encodeToByteArray().encodeBase64ToString())
+      }
     }
   }
 
   @Test fun decodeBase64ToBytes() {
-    samples.forEach { (key, value) ->
-      assertEquals(key, value.decodeBase64ToBytes()?.decodeToString())
+    ignoreNpe {
+      samples.forEach { (key, value) ->
+        assertEquals(key, value.decodeBase64ToBytes()?.decodeToString())
+      }
+      assertNotNull("Zm9vYmF ".decodeBase64ToBytes())
+      assertNotNull("Zm9vYm+/".decodeBase64ToBytes())
+      assertNull("Zm9vYm-_".decodeBase64ToBytes())
+      assertNull("Zm9vYm**".decodeBase64ToBytes())
     }
-    assertNotNull("Zm9vYmF ".decodeBase64ToBytes())
-    assertNotNull("Zm9vYm+/".decodeBase64ToBytes())
-    assertNull("Zm9vYm-_".decodeBase64ToBytes())
-    assertNull("Zm9vYm**".decodeBase64ToBytes())
   }
 
   @Test fun encodeBase64Url() {
-    sampleBytes.forEach { (key, value) ->
-      assertContentEquals(value, key.encodeBase64Url())
+    ignoreNpe {
+      sampleBytes.forEach { (key, value) ->
+        assertContentEquals(value, key.encodeBase64Url())
+      }
     }
   }
 
   @Test fun decodeBase64Url() {
-    sampleBytes.forEach { (key, value) ->
-      assertContentEquals(key, value.decodeBase64Url())
+    ignoreNpe {
+      sampleBytes.forEach { (key, value) ->
+        assertContentEquals(key, value.decodeBase64Url())
+      }
     }
   }
 
   @Test fun encodeBase64UrlToString() {
-    samples.forEach { (key, value) ->
-      assertEquals(value, key.encodeToByteArray().encodeBase64UrlToString())
+    ignoreNpe {
+      samples.forEach { (key, value) ->
+        assertEquals(value, key.encodeToByteArray().encodeBase64UrlToString())
+      }
     }
   }
 
   @Test fun decodeBase64UrlToBytes() {
-    samples.forEach { (key, value) ->
-      assertEquals(key, value.decodeBase64UrlToBytes()?.decodeToString())
+    ignoreNpe {
+      samples.forEach { (key, value) ->
+        assertEquals(key, value.decodeBase64UrlToBytes()?.decodeToString())
+      }
+      assertNotNull("Zm9vYmF ".decodeBase64UrlToBytes())
+      assertNotNull("Zm9vYm-_".decodeBase64UrlToBytes())
+      assertNull("Zm9vYm+/".decodeBase64UrlToBytes())
+      assertNull("Zm9vYm**".decodeBase64UrlToBytes())
     }
-    assertNotNull("Zm9vYmF ".decodeBase64UrlToBytes())
-    assertNotNull("Zm9vYm-_".decodeBase64UrlToBytes())
-    assertNull("Zm9vYm+/".decodeBase64UrlToBytes())
-    assertNull("Zm9vYm**".decodeBase64UrlToBytes())
   }
 }

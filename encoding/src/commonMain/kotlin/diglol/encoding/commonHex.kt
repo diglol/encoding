@@ -14,15 +14,15 @@ internal fun ByteArray.commonEncodeHex(): ByteArray {
   var i = 0
 
   for (b in this) {
-    val b1 = b.toInt() and 0xff
-    out[i++] = HEX[b1 shr 4 and 0xf]
+    val b1 = b.toInt()
+    out[i++] = HEX[b1 and 0xf0 ushr 4]
     out[i++] = HEX[b1 and 0xf]
   }
   return out
 }
 
 internal fun ByteArray.commonDecodeHex(): ByteArray? {
-  val limit = ignoreTrailingLength()
+  val limit = sizeOfIgnoreTrailing()
   if (limit == 0) {
     return ByteArray(0)
   }
