@@ -20,12 +20,14 @@ class HexBenchmark {
   @Param("1024", "10240", "102400")
   var dataSize = 0
   private lateinit var data: ByteArray
-  private lateinit var hex: String
+  private lateinit var hex: ByteArray
+  private lateinit var hexString: String
 
   @Setup
   fun setup() {
     data = Random.nextBytes(dataSize)
     hex = data.encodeHex()
+    hexString = data.encodeHexToString()
   }
 
   @Benchmark
@@ -33,4 +35,10 @@ class HexBenchmark {
 
   @Benchmark
   fun decodeHex() = hex.decodeHex()
+
+  @Benchmark
+  fun encodeHexToString() = data.encodeHexToString()
+
+  @Benchmark
+  fun decodeHexToBytes() = hexString.decodeHexToBytes()
 }

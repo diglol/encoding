@@ -1,3 +1,4 @@
+import com.android.build.gradle.BaseExtension
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
@@ -11,6 +12,7 @@ buildscript {
   }
   dependencies {
     classpath(libs.kotlin.gradle.plugin)
+    classpath(libs.android.gradle.plugin)
     classpath(libs.mavenPublish.gradle.plugin)
     classpath(libs.benchmark.gradle.plugin)
   }
@@ -27,6 +29,22 @@ allprojects {
 }
 
 subprojects {
+  plugins.withId("com.android.library") {
+    extensions.configure<BaseExtension> {
+      lintOptions {
+        textReport = true
+        textOutput("stdout")
+        lintConfig = rootProject.file("lint.xml")
+
+        isCheckDependencies = true
+        isCheckTestSources = false
+        isExplainIssues = false
+
+        isCheckReleaseBuilds = false
+      }
+    }
+  }
+
   tasks.withType(Test::class).configureEach {
     testLogging {
       if (System.getenv("CI") == "true") {

@@ -10,51 +10,50 @@ allOpen {
 
 kotlin {
   jvm()
-  js(IR) {
+  js("jsIr", IR) {
     browser()
     nodejs()
   }
-  js { // BOTH error
+  js("js", LEGACY) {
     browser()
     nodejs()
   }
 
+  macosX64()
+  macosArm64()
   mingwX64()
   linuxX64()
 
   sourceSets {
+    all {
+      languageSettings.optIn("kotlin.RequiresOptIn")
+    }
+
     val commonMain by sourceSets.getting {
       dependencies {
         implementation(projects.encoding)
         implementation(libs.benchmark.runtime)
       }
     }
-    val commonTest by sourceSets.getting {
-      dependencies {
-        implementation(kotlin("test"))
-      }
-    }
 
     val jvmMain by sourceSets.getting {
       dependsOn(commonMain)
-    }
-    val jvmTest by sourceSets.getting {
-      dependsOn(jvmMain)
-      dependsOn(commonTest)
+      dependencies {
+        api(libs.jmh.core)
+      }
     }
 
     val jsMain by sourceSets.getting
-    val jsTest by sourceSets.getting
+    val jsIrMain by sourceSets.getting {
+      dependsOn(jsMain)
+    }
 
-    val nativeMain by sourceSets.creating
-    nativeMain.dependsOn(commonMain)
+    val nativeMain by sourceSets.creating {
+      dependsOn(commonMain)
+    }
 
     val darwinMain by sourceSets.creating {
       dependsOn(nativeMain)
-    }
-
-    val darwinTest by sourceSets.creating {
-      dependsOn(commonTest)
     }
 
     val linuxMain by sourceSets.creating {
@@ -77,14 +76,6 @@ kotlin {
           else -> nativeMain
         }
       )
-
-      testSourceSet.dependsOn(
-        if (konanTarget.family.isAppleFamily) {
-          darwinTest
-        } else {
-          commonTest
-        }
-      )
     }
   }
 }
@@ -96,15 +87,14 @@ benchmark {
       iterationTime = 1
       advanced("jvmForks", 1)
       advanced("nativeGCAfterIteration", true)
-      advanced("perBenchmark", "perBenchmark")
+      advanced("nativeFork", "perBenchmark")
       reportFormat = "text"
     }
 
     targets {
       register("jvm")
-      register("js")
       register("jsIr")
-      register("iosArm64")
+      register("js")
       register("macosX64")
       register("macosArm64")
       register("linuxX64")
