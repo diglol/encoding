@@ -22,7 +22,7 @@ buildscript {
 
 allprojects {
   group = "com.diglol.encoding"
-  version = "0.1.0"
+  version = "0.2.0-SNAPSHOT"
 
   repositories {
     mavenCentral()
