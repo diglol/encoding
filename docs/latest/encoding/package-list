@@ -1,0 +1,27 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:diglol.encoding////PointingToDeclaration/encoding/diglol.encoding/index.html
+$dokka.location:diglol.encoding//decodeBase32/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/decode-base32.html
+$dokka.location:diglol.encoding//decodeBase32Hex/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/decode-base32-hex.html
+$dokka.location:diglol.encoding//decodeBase32HexToBytes/kotlin.String#/PointingToDeclaration/encoding/diglol.encoding/decode-base32-hex-to-bytes.html
+$dokka.location:diglol.encoding//decodeBase32ToBytes/kotlin.String#/PointingToDeclaration/encoding/diglol.encoding/decode-base32-to-bytes.html
+$dokka.location:diglol.encoding//decodeBase64/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/decode-base64.html
+$dokka.location:diglol.encoding//decodeBase64ToBytes/kotlin.String#/PointingToDeclaration/encoding/diglol.encoding/decode-base64-to-bytes.html
+$dokka.location:diglol.encoding//decodeBase64Url/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/decode-base64-url.html
+$dokka.location:diglol.encoding//decodeBase64UrlToBytes/kotlin.String#/PointingToDeclaration/encoding/diglol.encoding/decode-base64-url-to-bytes.html
+$dokka.location:diglol.encoding//decodeHex/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/decode-hex.html
+$dokka.location:diglol.encoding//decodeHexToBytes/kotlin.String#/PointingToDeclaration/encoding/diglol.encoding/decode-hex-to-bytes.html
+$dokka.location:diglol.encoding//encodeBase32/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-base32.html
+$dokka.location:diglol.encoding//encodeBase32Hex/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-base32-hex.html
+$dokka.location:diglol.encoding//encodeBase32HexToString/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-base32-hex-to-string.html
+$dokka.location:diglol.encoding//encodeBase32ToString/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-base32-to-string.html
+$dokka.location:diglol.encoding//encodeBase64/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-base64.html
+$dokka.location:diglol.encoding//encodeBase64ToString/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-base64-to-string.html
+$dokka.location:diglol.encoding//encodeBase64Url/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-base64-url.html
+$dokka.location:diglol.encoding//encodeBase64UrlToString/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-base64-url-to-string.html
+$dokka.location:diglol.encoding//encodeHex/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-hex.html
+$dokka.location:diglol.encoding//encodeHexToString/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-hex-to-string.html
+$dokka.location:diglol.encoding/InternalApi///PointingToDeclaration/encoding/diglol.encoding/-internal-api/index.html
+$dokka.location:diglol.encoding/InternalApi/InternalApi/#/PointingToDeclaration/encoding/diglol.encoding/-internal-api/-internal-api.html
+diglol.encoding
+
