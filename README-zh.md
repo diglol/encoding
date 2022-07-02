@@ -13,7 +13,7 @@ Diglol Encoding 为 Kotlin Multiplatform 提供常用的编码实现。
 我们的 [change log](CHANGELOG.md) 有发布历史。
 
 ```gradle
-implementation("com.diglol.encoding:encoding:0.1.0-SNAPSHOT")
+implementation("com.diglol.encoding:encoding:0.1.0")
 ```
 
 ### 使用
