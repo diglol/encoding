@@ -1,6 +1,11 @@
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinMultiplatform
+import com.vanniktech.maven.publish.MavenPublishBaseExtension
+
 plugins {
   kotlin("multiplatform")
   id("com.android.library")
+  id("org.jetbrains.dokka")
   id("com.vanniktech.maven.publish.base")
 }
 
@@ -140,4 +145,12 @@ android {
 dependencies {
   androidTestImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.runner)
+}
+
+configure<MavenPublishBaseExtension> {
+  configure(
+    KotlinMultiplatform(
+      javadocJar = JavadocJar.Dokka("dokkaGfm")
+    )
+  )
 }

@@ -3,6 +3,7 @@ import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.dokka.gradle.DokkaTask
 
 buildscript {
   repositories {
@@ -13,6 +14,7 @@ buildscript {
   dependencies {
     classpath(libs.kotlin.gradle.plugin)
     classpath(libs.android.gradle.plugin)
+    classpath(libs.dokka.gradle.plugin)
     classpath(libs.mavenPublish.gradle.plugin)
     classpath(libs.benchmark.gradle.plugin)
   }
@@ -56,6 +58,20 @@ subprojects {
 }
 
 allprojects {
+  tasks.withType<DokkaTask>().configureEach {
+    dokkaSourceSets.configureEach {
+      reportUndocumented.set(false)
+      skipDeprecated.set(true)
+      jdkVersion.set(8)
+      noAndroidSdkLink.set(true)
+
+      perPackageOption {
+        matchingRegex.set("diglol\\.encoding\\.internal\\.*")
+        suppress.set(true)
+      }
+    }
+  }
+
   plugins.withId("com.vanniktech.maven.publish.base") {
     configure<PublishingExtension> {
       repositories {

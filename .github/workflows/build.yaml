@@ -1,7 +1,7 @@
 name: build
 
 on:
-  pull_request: {}
+  pull_request: { }
   push:
     branches:
       - '**'
@@ -23,10 +23,22 @@ jobs:
           distribution: 'zulu'
           java-version: 18
 
-      - run: ./gradlew build
+      - run: ./gradlew build --stacktrace
+
+      - run: ./gradlew assemble dokkaHtml
 
       - run: ./gradlew publish
         if: ${{ github.ref == 'refs/heads/trunk' && github.repository == 'diglol/encoding' }}
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+
+      - name: Deploy docs
+        if: ${{ github.ref == 'refs/heads/trunk' && github.repository == 'diglol/encoding' }}
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: site
+          FOLDER: encoding/build/dokka/html
+          TARGET_FOLDER: docs/latest/
+          CLEAN: true

@@ -20,7 +20,9 @@ jobs:
           distribution: 'zulu'
           java-version: 18
 
-      - run: ./gradlew build
+      - run: ./gradlew build --stacktrace
+
+      - run: ./gradlew assemble dokkaHtml
 
       - run: ./gradlew publish
         if: ${{ startsWith(github.ref, 'refs/tags/') && github.repository == 'diglol/encoding' }}
@@ -37,3 +39,14 @@ jobs:
           body: ${{ steps.release_notes.outputs.release_notes }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy docs
+        if: ${{ startsWith(github.ref, 'refs/tags/') && github.repository == 'diglol/encoding' }}
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: site
+          FOLDER: encoding/build/dokka/html
+          TARGET_FOLDER: docs/0.x/
+          CLEAN: true
+
