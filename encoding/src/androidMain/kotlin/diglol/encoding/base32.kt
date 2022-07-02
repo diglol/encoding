@@ -1,5 +1,12 @@
 package diglol.encoding
 
+import diglol.encoding.internal.BASE32
+import diglol.encoding.internal.BASE32_HEX
+import diglol.encoding.internal.BASE32_HEX_LOOKUP
+import diglol.encoding.internal.BASE32_LOOKUP
+import diglol.encoding.internal.commonDecodeBase32
+import diglol.encoding.internal.commonEncodeBase32
+
 // Base32 Std
 actual fun ByteArray.encodeBase32(): ByteArray = commonEncodeBase32(BASE32)
 actual fun ByteArray.decodeBase32(): ByteArray? = commonDecodeBase32(BASE32_LOOKUP)

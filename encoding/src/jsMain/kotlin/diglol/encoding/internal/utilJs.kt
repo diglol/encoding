@@ -1,5 +1,6 @@
-package diglol.encoding
+package diglol.encoding.internal
 
+import diglol.encoding.InternalApi
 import org.khronos.webgl.Int8Array
 import org.khronos.webgl.Uint8Array
 

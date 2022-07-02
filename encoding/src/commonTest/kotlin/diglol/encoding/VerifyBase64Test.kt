@@ -2,6 +2,8 @@
 
 package diglol.encoding
 
+import diglol.encoding.internal.commonDecodeBase64
+import diglol.encoding.internal.commonEncodeBase64
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContentEquals

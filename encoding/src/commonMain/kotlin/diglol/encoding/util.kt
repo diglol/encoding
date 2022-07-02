@@ -3,7 +3,7 @@ package diglol.encoding
 internal const val equalsByte = '='.code.toByte()
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun ByteArray.selfOrCopyOf(newSize: Int): ByteArray =
+internal inline fun ByteArray.selfOrCopyOf(newSize: Int): ByteArray =
   if (size == newSize) this else copyOf(newSize)
 
 // Was all padding, whitespace, or otherwise ignorable characters

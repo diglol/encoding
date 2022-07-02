@@ -1,5 +1,9 @@
 package diglol.encoding
 
+import diglol.encoding.internal.BASE64_URL_SAFE
+import diglol.encoding.internal.commonDecodeBase64
+import diglol.encoding.internal.commonEncodeBase64
+
 // Base64 Std
 actual fun ByteArray.encodeBase64(): ByteArray = commonEncodeBase64()
 actual fun ByteArray.decodeBase64(): ByteArray? = commonDecodeBase64()

@@ -2,6 +2,8 @@
 
 package diglol.encoding
 
+import diglol.encoding.internal.jsDecodeToString
+import diglol.encoding.internal.jsEncodeToByteArray
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertContentEquals

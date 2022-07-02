@@ -2,6 +2,14 @@
 
 package diglol.encoding
 
+import diglol.encoding.internal.commonDecodeBase64
+import diglol.encoding.internal.commonDecodeBase64ToBytes
+import diglol.encoding.internal.commonDecodeBase64Url
+import diglol.encoding.internal.commonDecodeBase64UrlToBytes
+import diglol.encoding.internal.commonEncodeBase64
+import diglol.encoding.internal.commonEncodeBase64ToString
+import diglol.encoding.internal.commonEncodeBase64Url
+import diglol.encoding.internal.commonEncodeBase64UrlToString
 import kotlin.random.Random
 import kotlinx.benchmark.Benchmark
 import kotlinx.benchmark.BenchmarkMode

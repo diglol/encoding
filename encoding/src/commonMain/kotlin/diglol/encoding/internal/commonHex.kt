@@ -1,5 +1,6 @@
-package diglol.encoding
+package diglol.encoding.internal
 
+import diglol.encoding.sizeOfIgnoreTrailing
 import kotlin.native.concurrent.SharedImmutable
 
 // https://datatracker.ietf.org/doc/html/rfc4648
