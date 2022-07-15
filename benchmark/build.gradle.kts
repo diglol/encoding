@@ -1,6 +1,6 @@
 plugins {
   kotlin("multiplatform")
-  kotlin("plugin.allopen") version libs.versions.kotlin.get()
+  kotlin("plugin.allopen") version "1.6.21"
   id("org.jetbrains.kotlinx.benchmark")
 }
 
@@ -11,11 +11,9 @@ allOpen {
 kotlin {
   jvm()
   js("jsIr", IR) {
-    browser()
     nodejs()
   }
   js("js", LEGACY) {
-    browser()
     nodejs()
   }
 
