@@ -85,7 +85,7 @@ allprojects {
       publishToMavenCentral(SonatypeHost.S01)
       signAllPublications()
       pom {
-        description.set("Diglol Encoding provides implementations of common encodings for Kotlin Multiplatform.")
+        description.set("Diglol Encoding provides Hex/Base16, Base32, Base64 encodings for Kotlin Multiplatform.")
         name.set(project.name)
         url.set("https://github.com/diglol/encoding/")
         licenses {
