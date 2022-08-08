@@ -1,6 +1,6 @@
 # Diglol Encoding
 
-Diglol Encoding 为 Kotlin Multiplatform 提供常用的编码实现。
+Diglol Encoding 为 Kotlin Multiplatform 提供了 Hex/Base16、Base32、Base64 编码。
 
 当前支持的编码:
 
