@@ -1,6 +1,6 @@
 plugins {
   kotlin("multiplatform")
-  kotlin("plugin.allopen") version "1.6.21"
+  kotlin("plugin.allopen") version libs.versions.kotlin
   id("org.jetbrains.kotlinx.benchmark")
 }
 
