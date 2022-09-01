@@ -45,10 +45,10 @@ internal fun ByteArray.commonEncodeBase32(map: ByteArray = BASE32): ByteArray {
   var n = 0
 
   while (i < size) {
-    val inV = this[i].retrieve()
+    val inV = this[i].toInt() and 0xff
     var mapIndex: Int
     if (n > 3) {
-      val nextByte = if (i + 1 < size) this[i + 1].retrieve() else 0
+      val nextByte = if (i + 1 < size) this[i + 1].toInt() and 0xff else 0
       mapIndex = inV and (0xff shr n)
       n = (n + 5) % 8
       mapIndex = mapIndex shl n
@@ -121,10 +121,4 @@ internal fun ByteArray.commonDecodeBase32(lookup: IntArray = BASE32_LOOKUP): Byt
   }
 
   return out.selfOrCopyOf(outIndex)
-}
-
-@Suppress("NOTHING_TO_INLINE")
-private inline fun Byte.retrieve(): Int {
-  val bits = toInt()
-  return if (bits < 0) bits + 256 else bits
 }
