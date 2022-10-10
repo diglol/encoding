@@ -1,4 +1,8 @@
+@file:JvmName("Base32")
+
 package diglol.encoding
+
+import kotlin.jvm.JvmName
 
 // Base32 Std
 expect fun ByteArray.encodeBase32(): ByteArray

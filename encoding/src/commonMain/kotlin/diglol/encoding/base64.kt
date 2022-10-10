@@ -1,4 +1,8 @@
+@file:JvmName("Base64")
+
 package diglol.encoding
+
+import kotlin.jvm.JvmName
 
 // Base64 Std
 expect fun ByteArray.encodeBase64(): ByteArray
