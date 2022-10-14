@@ -1,3 +1,5 @@
+@file:JvmName("Base64")
+
 package diglol.encoding
 
 import android.os.Build
