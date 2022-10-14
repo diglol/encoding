@@ -1,3 +1,5 @@
+@file:JvmName("Hex")
+
 package diglol.encoding
 
 import diglol.encoding.internal.commonDecodeHex
