@@ -1,8 +1,6 @@
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetWithSimulatorTests
 
 plugins {
   kotlin("multiplatform")
@@ -16,7 +14,7 @@ kotlin {
     publishLibraryVariants("release")
   }
   jvm()
-  js(BOTH) {
+  js(IR) {
     browser()
     nodejs()
   }
@@ -25,21 +23,17 @@ kotlin {
   macosArm64()
   iosX64()
   iosArm64()
-  iosArm32()
   iosSimulatorArm64()
   watchosArm32()
   watchosArm64()
   watchosSimulatorArm64()
-  watchosX86()
   watchosX64()
   tvosArm64()
   tvosSimulatorArm64()
   tvosX64()
 
   mingwX64()
-  mingwX86()
   linuxX64()
-  linuxArm32Hfp()
 
   sourceSets {
     all {
@@ -77,7 +71,7 @@ kotlin {
     val androidMain by sourceSets.getting {
       dependsOn(commonJvmMain)
     }
-    val androidTest by sourceSets.getting {
+    val androidInstrumentedTest by sourceSets.getting {
       dependsOn(androidMain)
       dependsOn(commonJvmTest)
     }
