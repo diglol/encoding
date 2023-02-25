@@ -22,6 +22,5 @@ $dokka.location:diglol.encoding//encodeBase64UrlToString/kotlin.ByteArray#/Point
 $dokka.location:diglol.encoding//encodeHex/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-hex.html
 $dokka.location:diglol.encoding//encodeHexToString/kotlin.ByteArray#/PointingToDeclaration/encoding/diglol.encoding/encode-hex-to-string.html
 $dokka.location:diglol.encoding/InternalApi///PointingToDeclaration/encoding/diglol.encoding/-internal-api/index.html
-$dokka.location:diglol.encoding/InternalApi/InternalApi/#/PointingToDeclaration/encoding/diglol.encoding/-internal-api/-internal-api.html
 diglol.encoding
 
