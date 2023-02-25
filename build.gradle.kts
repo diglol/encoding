@@ -24,7 +24,7 @@ buildscript {
 
 allprojects {
   group = "com.diglol.encoding"
-  version = "0.2.0-SNAPSHOT"
+  version = "0.2.0"
 
   repositories {
     mavenCentral()
