@@ -8,7 +8,7 @@
 
 * Improve `decodeHex` performance on non-Jvm platforms. (#32)
 * Provide friendly api for Jvm (#17)
-* Remove `Byte.retrieve()` (#22)
+* Remove `Byte.retrieve()` (#9)
 
 ## [0.1.0] - 2022-07-02
 
