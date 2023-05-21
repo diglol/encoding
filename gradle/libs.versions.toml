@@ -3,7 +3,7 @@ compileSdk = "31"
 minSdk = "21"
 targetSdk = "31"
 kotlin = "1.8.21"
-benchmark = "0.4.7"
+benchmark = "0.4.8"
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
