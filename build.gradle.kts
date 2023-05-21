@@ -19,6 +19,7 @@ buildscript {
   }
   dependencies {
     classpath(libs.kotlin.gradle.plugin)
+    classpath(libs.kotlin.allopen)
     classpath(libs.android.gradle.plugin)
     classpath(libs.dokka.gradle.plugin)
     classpath(libs.mavenPublish.gradle.plugin)
