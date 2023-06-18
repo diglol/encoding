@@ -2,6 +2,15 @@ package diglol.encoding.internal
 
 import kotlin.native.concurrent.SharedImmutable
 
+/**
+ * Implementation of Base45 encoding/decoding.
+ *
+ * Basically, Base45 is just encode 2 bytes based on 256 into 3 bytes based on 45.
+ *
+ * It will result in a encoded string which will generate a compat QR code when using alphanumeric mode.
+ *
+ * @see [RFC 9285](https://datatracker.ietf.org/doc/rfc9285/)
+ */
 
 @SharedImmutable
 internal val BASE45 = byteArrayOf(
@@ -104,6 +113,9 @@ internal fun ByteArray.commonDecodeBase45(): ByteArray? {
   return outBytes
 }
 
+/**
+ * Converts a char's byte code to a Base45 lookup table index.
+ */
 private fun Byte.toBase45Code(): Int? {
   return when (this.toInt() and 0xff) {
     32 -> 36
