@@ -1,7 +1,10 @@
 package diglol.encoding.internal
 
+import kotlin.native.concurrent.SharedImmutable
 
-private val BASE45 = byteArrayOf(
+
+@SharedImmutable
+internal val BASE45 = byteArrayOf(
   48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // 0-9
   65, 66, 67, 68, 69, 70, 71, 72, 73, 74, // A-J
   75, 76, 77, 78, 79, 80, 81, 82, 83, 84, // K-T
