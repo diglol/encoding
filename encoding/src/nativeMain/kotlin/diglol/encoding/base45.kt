@@ -8,4 +8,4 @@ actual fun ByteArray.encodeBase45(): ByteArray = commonEncodeBase45(BASE45)
 actual fun ByteArray.decodeBase45(): ByteArray? = commonDecodeBase45()
 
 actual fun ByteArray.encodeBase45ToString(): String = commonEncodeBase45(BASE45).decodeToString()
-actual fun ByteArray.decodeBase45ToString(): String? = commonDecodeBase45()?.decodeToString()
+actual fun String.decodeBase45ToBytes(): ByteArray? = encodeToByteArray().decodeBase45()

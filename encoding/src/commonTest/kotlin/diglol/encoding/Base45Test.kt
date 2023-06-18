@@ -53,10 +53,10 @@ class Base45Test {
   }
 
   @Test
-  fun testDecodeBase45ToString() {
+  fun testDecodeBase45ToBytes() {
     sample.forEach { (expectedOrigin, encoded) ->
       ignoreNpe {
-        assertEquals(expectedOrigin, encoded.encodeToByteArray().decodeBase45ToString())
+        assertContentEquals(expectedOrigin.encodeToByteArray(), encoded.decodeBase45ToBytes())
       }
     }
   }
@@ -65,7 +65,7 @@ class Base45Test {
   fun testInvalidDecodeBase45() {
     invalidSample.forEach { (encoded, expectedOrigin) ->
       ignoreNpe {
-        assertContentEquals(expectedOrigin, encoded.encodeToByteArray().decodeBase45())
+        assertContentEquals(expectedOrigin, encoded.decodeBase45ToBytes())
       }
     }
   }
