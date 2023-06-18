@@ -63,3 +63,61 @@ private fun ByteArray.sizeOfEncodedBase45(): Int {
   }
 }
 
+internal fun ByteArray.commonDecodeBase45(): ByteArray? {
+  if (isEncodedSizeNotValid()) {
+    return null
+  }
+
+  val limit = if (size % 3 == 0) size else size - 2
+  val outSize = if (size % 3 == 0) size / 3 * 2 else (size - 2) / 3 * 2 + 1
+
+  val outBytes = ByteArray(outSize)
+
+  var i = 0
+  var j = 0
+
+  while (i < limit) {
+
+    val c = this[i].toBase45Code() ?: return null
+    val d = this[i + 1].toBase45Code() ?: return null
+    val e = this[i + 2].toBase45Code() ?: return null
+
+    val n = c + d * 45 + e * 45 * 45
+
+    val a = n ushr 8
+    val b = n and 0xff
+
+    outBytes[j] = a.toByte()
+    outBytes[j + 1] = b.toByte()
+
+    i += 3
+    j += 2
+  }
+
+  if (limit < size) {
+    val c = this[limit].toBase45Code() ?: return null
+    val d = this[limit + 1].toBase45Code() ?: return null
+    val a = c + d * 45
+    outBytes[j] = a.toByte()
+  }
+
+  return outBytes
+}
+
+private fun Byte.toBase45Code(): Int? {
+  return when (this.toInt() and 0xff) {
+    32 -> 36
+    58 -> 44
+    in 36..37 -> this + 1
+    in 42..43 -> this - 3
+    in 45..47 -> this - 4
+    in '0'.code..'9'.code -> this - '0'.code
+    in 'A'.code..'Z'.code -> this - 'A'.code + 10
+    else -> null
+  }
+}
+
+private fun ByteArray.isEncodedSizeNotValid(): Boolean {
+  return size % 3 == 1
+}
+
