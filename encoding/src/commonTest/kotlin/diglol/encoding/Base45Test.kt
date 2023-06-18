@@ -15,7 +15,7 @@ class Base45Test {
   )
 
   private val sampleBytes = sample.map { (origin, encoded) ->
-    origin.encodeToByteArray() to encoded?.encodeToByteArray()
+    origin.encodeToByteArray() to encoded.encodeToByteArray()
   }.toMap()
 
 
@@ -46,7 +46,7 @@ class Base45Test {
   fun testDecodeBase45() {
     sampleBytes.forEach { (expectedOrigin, encoded) ->
       ignoreNpe {
-        assertContentEquals(expectedOrigin, encoded?.decodeBase45())
+        assertContentEquals(expectedOrigin, encoded.decodeBase45())
       }
     }
   }
@@ -55,7 +55,7 @@ class Base45Test {
   fun testDecodeBase45ToString() {
     sample.forEach { (expectedOrigin, encoded) ->
       ignoreNpe {
-        assertEquals(expectedOrigin, encoded?.encodeToByteArray()?.decodeBase45ToString())
+        assertEquals(expectedOrigin, encoded.encodeToByteArray().decodeBase45ToString())
       }
     }
   }
