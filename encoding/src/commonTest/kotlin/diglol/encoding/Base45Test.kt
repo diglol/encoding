@@ -11,7 +11,8 @@ class Base45Test {
     "Hello!!" to "%69 VD92EX0",
     "base-45" to "UJCLQE7W581",
     "ietf!" to "QED8WEX0",
-    "CQ CQ CQ DE BG8ANC" to "/M8O34NBA/M8P34BX82H8157A+9",
+    """the quick brown fox jumps over the lazy dog THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG 1234567890-=[];',./\!@#$%^&*()_+{}|:"<>?""" to
+      """AWEDZCKFEOEDJOD2KC54EM-DX.CH8FSKDQ${'$'}D.OE44E5${'$'}CS44+8DK44OEC3EFGVCU1DLTABX8VCAZB9HM9DH8G1AK*9:*8F6B*H9${'$'}Y9+MAF1AGY8-34669X34ZB81CBRS8S:8*96DL6WW66:6FA7GW5YOBNL7FQ5J:5794-J4QW45${'$'}4L35I1CNRFWVFYE45*7""",
   )
 
   private val sampleBytes = sample.map { (origin, encoded) ->
