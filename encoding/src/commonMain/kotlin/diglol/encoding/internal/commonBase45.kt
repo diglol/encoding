@@ -60,7 +60,7 @@ internal fun ByteArray.commonEncodeBase45(map: ByteArray = BASE45): ByteArray {
   return outBytes
 }
 
-private fun ByteArray.sizeOfEncodedBase45(): Int {
+private inline fun ByteArray.sizeOfEncodedBase45(): Int {
   if (isEmpty()) {
     return 0
   }
