@@ -1,3 +1,5 @@
+@file:JvmName("Base32")
+
 package diglol.encoding
 
 import diglol.encoding.internal.BASE45
