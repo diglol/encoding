@@ -129,7 +129,7 @@ private fun Byte.toBase45Code(): Int? {
   }
 }
 
-private fun ByteArray.isEncodedSizeNotValid(): Boolean {
+private inline fun ByteArray.isEncodedSizeNotValid(): Boolean {
   return size % 3 == 1
 }
 
