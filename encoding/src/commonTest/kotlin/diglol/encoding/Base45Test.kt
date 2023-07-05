@@ -19,7 +19,6 @@ class Base45Test {
     origin.encodeToByteArray() to encoded.encodeToByteArray()
   }.toMap()
 
-
   private val invalidSample = mapOf(
     "|~{}" to null,
     0x0.toChar().toString() to null,
