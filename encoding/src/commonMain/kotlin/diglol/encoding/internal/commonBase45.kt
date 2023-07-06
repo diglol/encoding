@@ -22,7 +22,6 @@ internal val BASE45 = byteArrayOf(
   32, 36, 37, 42, 43, 45, 46, 47, 58
 )
 
-
 internal fun ByteArray.commonEncodeBase45(map: ByteArray = BASE45): ByteArray {
   val outSize = when {
     isEmpty() -> 0
