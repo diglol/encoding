@@ -1,0 +1,10 @@
+package diglol.encoding
+
+import diglol.encoding.internal.commonDecodeBase45
+import diglol.encoding.internal.commonEncodeBase45
+
+actual fun ByteArray.encodeBase45(): ByteArray = commonEncodeBase45()
+actual fun ByteArray.decodeBase45(): ByteArray? = commonDecodeBase45()
+
+actual fun ByteArray.encodeBase45ToString(): String = commonEncodeBase45().decodeToString()
+actual fun String.decodeBase45ToBytes(): ByteArray? = encodeToByteArray().decodeBase45()
