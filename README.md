@@ -7,7 +7,7 @@ Currently supported encodings:
 
 - Hex(Base16)
 - Base32 (Std, Hex)
-- Base45 (Std)
+- Base45
 - Base64 (Std, Url)
 
 ### Releases

@@ -6,7 +6,7 @@ Diglol Encoding 为 Kotlin Multiplatform 提供了 Hex/Base16、Base32、Base45�
 
 - Hex (Base16)
 - Base32 [Std, Hex]
-- Base45 [Std]
+- Base45
 - Base64 [Std, Url]
 
 ### 发布
