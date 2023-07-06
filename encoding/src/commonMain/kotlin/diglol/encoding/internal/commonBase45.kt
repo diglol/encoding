@@ -24,7 +24,11 @@ internal val BASE45 = byteArrayOf(
 
 
 internal fun ByteArray.commonEncodeBase45(map: ByteArray = BASE45): ByteArray {
-  val outSize = sizeOfEncodedBase45()
+  val outSize = when {
+    isEmpty() -> 0
+    size % 2 == 0 -> size * 3 / 2
+    else -> (size - 1) * 3 / 2 + 2
+  }
   val outBytes = ByteArray(outSize)
   val limit = if (size % 2 == 0) size else size - 1
 
@@ -58,18 +62,6 @@ internal fun ByteArray.commonEncodeBase45(map: ByteArray = BASE45): ByteArray {
   }
 
   return outBytes
-}
-
-private inline fun ByteArray.sizeOfEncodedBase45(): Int {
-  if (isEmpty()) {
-    return 0
-  }
-
-  return if (size % 2 == 0) {
-    size * 3 / 2
-  } else {
-    (size - 1) * 3 / 2 + 2
-  }
 }
 
 internal fun ByteArray.commonDecodeBase45(): ByteArray? {
