@@ -1,4 +1,4 @@
-@file:JvmName("Base32")
+@file:JvmName("Base45")
 
 package diglol.encoding
 
