@@ -86,3 +86,4 @@ assert(data.contentEquals(base64UrlString.decodeBase64UrlToBytes()))
     limitations under the License.
 
 [rfc4648]: https://datatracker.ietf.org/doc/html/rfc4648
+[rfc9285]: https://datatracker.ietf.org/doc/html/rfc9285
