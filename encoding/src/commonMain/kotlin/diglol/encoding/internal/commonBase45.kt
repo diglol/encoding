@@ -73,7 +73,7 @@ private inline fun ByteArray.sizeOfEncodedBase45(): Int {
 }
 
 internal fun ByteArray.commonDecodeBase45(): ByteArray? {
-  if (isEncodedSizeNotValid()) {
+  if (size % 3 == 1) {
     return null
   }
 
@@ -128,8 +128,3 @@ private fun Byte.toBase45Code(): Int? {
     else -> null
   }
 }
-
-private inline fun ByteArray.isEncodedSizeNotValid(): Boolean {
-  return size % 3 == 1
-}
-
