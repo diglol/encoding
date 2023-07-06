@@ -112,9 +112,9 @@ private fun Byte.toBase45Code(): Int? {
   return when (this.toInt() and 0xff) {
     32 -> 36
     58 -> 44
-    in 36..37 -> this + 1
-    in 42..43 -> this - 3
-    in 45..47 -> this - 4
+    36, 37 -> this + 1
+    42, 43 -> this - 3
+    45, 46, 47 -> this - 4
     in '0'.code..'9'.code -> this - '0'.code
     in 'A'.code..'Z'.code -> this - 'A'.code + 10
     else -> null
