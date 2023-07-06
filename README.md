@@ -1,12 +1,13 @@
 # Diglol Encoding
 
-Diglol Encoding provides Hex/Base16, Base32, Base64 encodings for Kotlin Multiplatform.
+Diglol Encoding provides Hex/Base16, Base32, Base45, Base64 encodings for Kotlin Multiplatform.
 Translations: [中文](README-zh.md)
 
 Currently supported encodings:
 
 - Hex(Base16)
 - Base32 (Std, Hex)
+- Base45 (Std)
 - Base64 (Std, Url)
 
 ### Releases
@@ -43,6 +44,16 @@ val base32HexString = data.encodeBase32HexToString()
 println(base32HexString)
 // 输出：CPNMUOJ1E8======
 assert(data.contentEquals(base32HexString.decodeBase32HexToBytes()))
+```
+
+##### [Base45][rfc9285]
+
+```kotlin
+val data = "base-45".encodeToByteArray()
+val base45String = data.encodeBase45ToString()
+println(base45String)
+// 输出：UJCLQE7W581
+assert(data.contentEquals(base45String.decodeBase45ToBytes()))
 ```
 
 ##### [Base64][rfc4648]
