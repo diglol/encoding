@@ -38,7 +38,7 @@ internal fun ByteArray.commonDecodeHex(): ByteArray? {
   return out
 }
 
-private inline fun Byte.decodeToInt(): Int? = when (val input = toInt()) {
+private fun Byte.decodeToInt(): Int? = when (val input = toInt()) {
   in '0'.code..'9'.code -> input - '0'.code
   in 'a'.code..'f'.code -> input - 'a'.code + 10
   in 'A'.code..'F'.code -> input - 'A'.code + 10
