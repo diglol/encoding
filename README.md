@@ -15,7 +15,7 @@ Currently supported encodings:
 Our [change log](CHANGELOG.md) has release history.
 
 ```gradle
-implementation("com.diglol.encoding:encoding:0.2.0")
+implementation("com.diglol.encoding:encoding:0.3.0")
 ```
 
 ### Usage

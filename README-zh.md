@@ -14,7 +14,7 @@ Diglol Encoding 为 Kotlin Multiplatform 提供了 Hex/Base16、Base32、Base45�
 我们的 [change log](CHANGELOG.md) 有发布历史。
 
 ```gradle
-implementation("com.diglol.encoding:encoding:0.2.0")
+implementation("com.diglol.encoding:encoding:0.3.0")
 ```
 
 ### 使用
