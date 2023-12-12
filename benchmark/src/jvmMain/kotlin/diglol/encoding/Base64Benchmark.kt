@@ -40,6 +40,8 @@ class Base64Benchmark {
     data = Random.nextBytes(dataSize)
     base64 = data.encodeBase64()
     base64String = data.encodeBase64ToString()
+    base64Url = data.encodeBase64Url()
+    base64UrlString = data.encodeBase64UrlToString()
   }
 
   @Benchmark
