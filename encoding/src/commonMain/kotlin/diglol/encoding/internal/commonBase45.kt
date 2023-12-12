@@ -1,7 +1,5 @@
 package diglol.encoding.internal
 
-import kotlin.native.concurrent.SharedImmutable
-
 /**
  * Implementation of Base45 encoding/decoding.
  *
@@ -12,7 +10,6 @@ import kotlin.native.concurrent.SharedImmutable
  * @see [RFC 9285](https://datatracker.ietf.org/doc/rfc9285/)
  */
 
-@SharedImmutable
 private val BASE45 = byteArrayOf(
   48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // 0-9
   65, 66, 67, 68, 69, 70, 71, 72, 73, 74, // A-J

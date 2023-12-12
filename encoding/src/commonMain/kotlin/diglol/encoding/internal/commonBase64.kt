@@ -3,12 +3,10 @@ package diglol.encoding.internal
 import diglol.encoding.equalsByte
 import diglol.encoding.selfOrCopyOf
 import diglol.encoding.sizeOfIgnoreTrailing
-import kotlin.native.concurrent.SharedImmutable
 
 /** @author Alexander Y. Kleymenov */
 
 // https://datatracker.ietf.org/doc/html/rfc4648
-@SharedImmutable
 internal val BASE64 = byteArrayOf(
   65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, // ABCDEFGHIJKLM
   78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 97, // NOPQRSTUVWXYZ
@@ -17,7 +15,6 @@ internal val BASE64 = byteArrayOf(
   48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 43, 47 // 0123456789+/
 )
 
-@SharedImmutable
 internal val BASE64_URL_SAFE = byteArrayOf(
   65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, // ABCDEFGHIJKLM
   78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 97, // NOPQRSTUVWXYZ
@@ -51,6 +48,7 @@ internal fun ByteArray.commonEncodeBase64(map: ByteArray = BASE64): ByteArray {
       out[index++] = equalsByte
       out[index] = equalsByte
     }
+
     2 -> {
       val b0 = this[i++].toInt()
       val b1 = this[i].toInt()
@@ -88,34 +86,41 @@ internal fun ByteArray.commonDecodeBase64(map: ByteArray = BASE64): ByteArray? {
         //  Z    90    25 (ASCII - 65)
         bits = c - 65
       }
+
       in 'a'.code..'z'.code -> {
         // char ASCII value
         //  a    97    26
         //  z    122   51 (ASCII - 71)
         bits = c - 71
       }
+
       in '0'.code..'9'.code -> {
         // char ASCII value
         //  0    48    52
         //  9    57    61 (ASCII + 4)
         bits = c + 4
       }
+
       '+'.code -> {
         if (!isBase64) return null
         bits = 62
       }
+
       '-'.code -> {
         if (isBase64) return null
         bits = 62
       }
+
       '/'.code -> {
         if (!isBase64) return null
         bits = 63
       }
+
       '_'.code -> {
         if (isBase64) return null
         bits = 63
       }
+
       else -> {
         return null
       }
@@ -138,11 +143,13 @@ internal fun ByteArray.commonDecodeBase64(map: ByteArray = BASE64): ByteArray? {
       // We read 1 char followed by "===". But 6 bits is a truncated byte! Fail.
       return null
     }
+
     2 -> {
       // We read 2 chars followed by "==". Emit 1 byte with 8 of those 12 bits.
       word = word shl 12
       out[outCount++] = (word shr 16).toByte()
     }
+
     3 -> {
       // We read 3 chars, followed by "=". Emit 2 bytes for 16 of those 18 bits.
       word = word shl 6
