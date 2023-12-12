@@ -3,17 +3,14 @@ package diglol.encoding.internal
 import diglol.encoding.equalsByte
 import diglol.encoding.selfOrCopyOf
 import diglol.encoding.sizeOfIgnoreTrailing
-import kotlin.native.concurrent.SharedImmutable
 
 // https://datatracker.ietf.org/doc/html/rfc4648
-@SharedImmutable
 internal val BASE32 = byteArrayOf(
   65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, // ABCDEFGHIJKLM
   78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, // NOPQRSTUVWXYZ
   50, 51, 52, 53, 54, 55 // 234567
 )
 
-@SharedImmutable
 internal val BASE32_LOOKUP = intArrayOf(
   255, 255, 26, 27, 28, 29, 30, 31, 255, 255, 255, 255, 255, 255, 255, 255, // 0123456789:;<=>?
   255, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, // @ABCDEFGHIJKLMNO
@@ -22,14 +19,12 @@ internal val BASE32_LOOKUP = intArrayOf(
   15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 255, 255, 255, 255, 255 // pqrstuvwxyz{|}~
 )
 
-@SharedImmutable
 internal val BASE32_HEX = byteArrayOf(
   48, 49, 50, 51, 52, 53, 54, 55, 56, 57,  // 0123456789
   65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, // ABCDEFGHIJK
   76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86  // LMNOPQRSTUV
 )
 
-@SharedImmutable
 internal val BASE32_HEX_LOOKUP = intArrayOf(
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 255, 255, 255, 255, 255, 255,  // 0123456789:;<=>?
   255, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, // @ABCDEFGHIJKLMNO

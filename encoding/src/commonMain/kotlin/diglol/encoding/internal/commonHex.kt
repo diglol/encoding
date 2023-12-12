@@ -1,10 +1,8 @@
 package diglol.encoding.internal
 
 import diglol.encoding.sizeOfIgnoreTrailing
-import kotlin.native.concurrent.SharedImmutable
 
 // https://datatracker.ietf.org/doc/html/rfc4648
-@SharedImmutable
 internal val HEX = byteArrayOf(
   48, 49, 50, 51, 52, 53, 54, 55, 56, 57, // 0123456789
   65, 66, 67, 68, 69, 70 // ABCDEF
